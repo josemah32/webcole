@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Subir Imagen</title>
+</head>
+<body>
+    <h1>Sube tu Imagen con tu Nombre</h1>
+    <form id="uploadForm">
+        <input type="text" id="nameInput" placeholder="Tu nombre" required>
+        <input type="file" id="fileInput" accept="image/*" required>
+        <button type="submit">Subir</button>
+    </form>
+    <div id="status"></div>
+    <h2>Imágenes Subidas:</h2>
+    <div id="uploadedImages"></div>
+
+    <script src="script.js" defer></script>
+</body>
+</html>
