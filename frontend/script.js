@@ -5,50 +5,66 @@ document.getElementById('uploadForm').addEventListener('submit', async function(
     const fileInput = document.getElementById('fileInput');
     const file = fileInput.files[0];
 
-    if (!nameInput) {
-        alert("Por favor, introduce tu nombre.");
+    if (!nameInput || !file) {
+        alert("Por favor, completa todos los campos.");
         return;
     }
 
-    if (!file) {
-        alert("Por favor, selecciona un archivo.");
-        return;
-    }
-
-    // Crea un FormData para enviar la imagen
     const formData = new FormData();
+    formData.append('name', nameInput);
     formData.append('image', file);
 
     try {
-        // Envía la imagen a Imgur usando tu Client ID
-        const response = await fetch('https://api.imgur.com/3/image', {
+        const response = await fetch('http://localhost:5000/upload', {
             method: 'POST',
-            headers: {
-                Authorization: 'Client-ID 3e6496959d9b209', // Reemplaza TU_CLIENT_ID con tu Client ID de Imgur
-            },
             body: formData
         });
 
-        const result = await response.json();
-        if (result.success) {
-            const imageUrl = result.data.link;
-            // Muestra el mensaje de éxito
+        if (response.ok) {
+            loadImages(); // Recargar las imágenes después de subir
             document.getElementById('status').innerText = "Imagen subida con éxito!";
-
-            // Añade el nombre y la URL a la lista de imágenes subidas
-            const uploadedImages = document.getElementById('uploadedImages');
-            const imageElement = document.createElement('div');
-            imageElement.innerHTML = `
-                <p><strong>Nombre:</strong> ${nameInput}</p>
-                <p><strong>URL:</strong> <a href="${imageUrl}" target="_blank">${imageUrl}</a></p>
-                <img src="${imageUrl}" alt="${nameInput}" style="max-width: 200px; margin-top: 10px;">
-            `;
-            uploadedImages.appendChild(imageElement);
+            document.getElementById('uploadForm').reset(); // Limpiar el formulario
         } else {
-            document.getElementById('status').innerText = "Hubo un problema al subir la imagen.";
+            alert("Hubo un problema al subir la imagen.");
         }
     } catch (error) {
         console.error("Error:", error);
-        document.getElementById('status').innerText = "Hubo un error al subir la imagen.";
+        alert("Hubo un error al subir la imagen.");
     }
 });
+
+// Cargar imágenes desde el servidor
+async function loadImages() {
+    const response = await fetch('http://localhost:5000/images');
+    const images = await response.json();
+
+    const uploadedImagesDiv = document.getElementById('uploadedImages');
+    uploadedImagesDiv.innerHTML = ''; // Limpiar el contenedor antes de cargar nuevas imágenes
+
+    images.forEach(image => {
+        const imageElement = document.createElement('div');
+        imageElement.innerHTML = `
+            <p><strong>Nombre:</strong> ${image.name}</p>
+            <img src="${image.url}" alt="${image.name}" style="max-width: 200px;">
+            <button onclick="deleteImage('${image._id}')">Eliminar</button>
+            <hr>
+        `;
+        uploadedImagesDiv.appendChild(imageElement);
+    });
+}
+
+// Función para eliminar imágenes
+async function deleteImage(id) {
+    const response = await fetch(`http://localhost:5000/images/${id}`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        loadImages(); // Recargar las imágenes después de eliminar
+    } else {
+        alert("Error al eliminar la imagen.");
+    }
+}
+
+// Cargar imágenes al inicio
+loadImages();
