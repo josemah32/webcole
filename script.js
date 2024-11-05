@@ -4,7 +4,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
     const name = document.getElementById("name").value;
     const course = document.getElementById("course").value;
     const imageFile = document.getElementById("image").files[0];
-    const clientId = 'TU_CLIENT_ID'; // Reemplaza con tu Client ID de Imgur
+    const clientId = 'cc3243a6889aef6'; // Reemplaza con tu Client ID de Imgur
 
     // Verifica que todos los campos están completos
     if (!name || !course || !imageFile) {
