@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Subir Fotos a Imgur</title>
+    <title>Subir Imagen a Imgur y Guardar en Google Sheets</title>
 </head>
 <body>
-    <h1>Sube tu Foto</h1>
-    <form id="uploadForm">
+    <h1>Subir Imagen</h1>
+    <p>Completa el formulario para subir tu imagen:</p>
+
+    <form id="uploadForm" onsubmit="handleSubmit(event)">
         <label for="name">Nombre:</label>
-        <input type="text" id="name" required><br><br>
-        
+        <input type="text" id="name" placeholder="Nombre" required />
+
         <label for="course">Curso:</label>
-        <input type="text" id="course" required><br><br>
-        
+        <input type="text" id="course" placeholder="Curso" required />
+
         <label for="image">Selecciona una imagen:</label>
-        <input type="file" id="image" accept="image/*" required><br><br>
-        
+        <input type="file" id="image" accept="image/*" required />
+
         <button type="submit">Subir</button>
     </form>
-    
-    <p id="status"></p>
 
     <script src="script.js"></script>
 </body>
