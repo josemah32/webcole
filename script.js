@@ -1,5 +1,5 @@
 async function uploadImageToImgur(imageFile) {
-    const clientId = 'TU_CLIENT_ID_DE_IMGUR'; // Reemplaza con tu Client ID de Imgur
+    const clientId = 'cc3243a6889aef6'; // Reemplaza con tu Client ID de Imgur
     const formData = new FormData();
     formData.append("image", imageFile);
 
