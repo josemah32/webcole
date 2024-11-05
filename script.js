@@ -32,7 +32,7 @@ document.getElementById("uploadForm").addEventListener("submit", async function(
             document.getElementById("status").innerText = "¡Imagen subida con éxito!";
             
             // Enviar los datos a la API de Vercel para guardarlos
-            const saveResponse = await fetch("https://TUNOMBREDEPROYECTO.vercel.app/api/saveData", {
+            const saveResponse = await fetch("https://webcole.vercel.app/api/saveData", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
