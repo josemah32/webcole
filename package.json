@@ -1,0 +1,12 @@
+{
+  "name": "webcole",
+  "version": "1.0.0",
+  "description": "Proyecto para manejar datos en Google Sheets",
+  "main": "index.js",
+  "scripts": {
+    "start": "node api/saveData.js"
+  },
+  "dependencies": {
+    "googleapis": "^105.0.0"
+  }
+}
