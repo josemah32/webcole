@@ -21,11 +21,12 @@
           justify-content: center;
           align-items: center;
           height: 100vh;
+          position: relative; /* Necesario para posicionar el botón en la esquina */
           transition: background 0.3s, color 0.3s; /* Transition for dark mode */
         }
 
         .dark-mode {
-          background: linear-gradient(135deg, #1a1a1a, #333);
+          background: linear-gradient(135deg, #1a1a1a, #222); /* Fondo más oscuro */
           color: #f0f0f0;
         }
 
@@ -40,7 +41,7 @@
         }
 
         .dark-mode .container {
-          background-color: #444;
+          background-color: #333; /* Fondo más oscuro en el modo oscuro */
           color: #f0f0f0;
         }
 
@@ -124,9 +125,11 @@
         }
 
         .toggle-button {
-          margin-top: 1rem;
-          background: none;
-          border: none;
+          position: absolute; /* Para colocar el botón en la esquina */
+          top: 20px; /* Ajusta la posición vertical */
+          right: 20px; /* Ajusta la posición horizontal */
+          background: none; /* Sin fondo */
+          border: none; /* Sin borde */
           cursor: pointer;
           font-size: 1.5rem; /* Tamaño del icono */
           transition: color 0.3s; /* Transición para el color */
